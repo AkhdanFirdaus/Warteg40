@@ -7,7 +7,7 @@ package com.kelompok1b.warteg40.view.Auth;
 
 import com.kelompok1b.warteg40.controller.CartController;
 import com.kelompok1b.warteg40.controller.UserController;
-import com.kelompok1b.warteg40.view.HomeForm;
+import com.kelompok1b.warteg40.view.Home.HomeForm;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 

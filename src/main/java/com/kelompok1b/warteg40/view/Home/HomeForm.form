@@ -220,11 +220,11 @@
                       <Group type="102" attributes="0">
                           <Component id="jComboBox1" min="-2" pref="149" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jTextField1" pref="742" max="32767" attributes="0"/>
+                          <Component id="textfield_find" pref="742" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jButton4" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="btn_find" min="-2" pref="141" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" pref="146" max="-2" attributes="0"/>
+                          <Component id="btn_cart" min="-2" pref="146" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -235,9 +235,9 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jComboBox1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="textfield_find" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="btn_cart" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="btn_find" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -264,28 +264,28 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="textfield_find">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ketik yang Ingin Dicari"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textfield_findActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btn_cart">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton2"/>
+            <Property name="text" type="java.lang.String" value="Keranjang"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cartActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="btn_find">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton4"/>
+            <Property name="text" type="java.lang.String" value="Cari"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_findActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">

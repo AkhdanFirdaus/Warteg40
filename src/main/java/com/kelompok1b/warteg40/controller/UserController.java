@@ -53,10 +53,11 @@ public class UserController {
         return false;
     }
     
-    public void register(String username, String password) {
+    public boolean register(String username, String password) {
         int newId = users.getLast().getId() + 1;
         users.add(new User(newId, username, password, 1));
         System.out.println("Sukses Register!");
+        return true;
     }
     
     public void logout() {

@@ -5,17 +5,21 @@
  */
 package com.kelompok1b.warteg40.view.Auth;
 
+import com.kelompok1b.warteg40.controller.UserController;
+
 /**
  *
  * @author akhda
  */
 public class RegisterForm extends javax.swing.JFrame {
-
+    UserController userController;
+    
     /**
      * Creates new form RegisterForm
      */
     public RegisterForm() {
         initComponents();
+        userController = UserController.getInstance();
     }
 
     /**
@@ -28,8 +32,8 @@ public class RegisterForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        username_label = new javax.swing.JTextField();
-        password_label = new javax.swing.JPasswordField();
+        textfield_username = new javax.swing.JTextField();
+        textfield_password = new javax.swing.JPasswordField();
         register_button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -59,21 +63,23 @@ public class RegisterForm extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(register_button, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                    .addComponent(password_label, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(username_label, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(register_button, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                            .addComponent(textfield_password, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textfield_username, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,11 +88,11 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(username_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textfield_username, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(password_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textfield_password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 21, Short.MAX_VALUE)
                 .addComponent(register_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -111,10 +117,14 @@ public class RegisterForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void register_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_buttonActionPerformed
-        LoginForm login = new LoginForm();
-        
-        login.setVisible(true);
-        this.dispose();
+        String username = textfield_username.getText();
+        String password = String.valueOf(textfield_password.getPassword());
+        boolean res = userController.register(username, password);
+        if (res) {
+            LoginForm login = new LoginForm();
+            login.setVisible(true);
+            this.dispose();
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_register_buttonActionPerformed
 
@@ -158,8 +168,8 @@ public class RegisterForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField password_label;
     private javax.swing.JButton register_button;
-    private javax.swing.JTextField username_label;
+    private javax.swing.JPasswordField textfield_password;
+    private javax.swing.JTextField textfield_username;
     // End of variables declaration//GEN-END:variables
 }
