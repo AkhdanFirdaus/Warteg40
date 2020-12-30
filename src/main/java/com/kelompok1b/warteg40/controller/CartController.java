@@ -44,4 +44,21 @@ public class CartController {
     public void clearCart() {
         cart.clear();
     }
+    
+    public int getSubTotal() {
+        int subTotal = 0;
+        for (Item item : cart) {
+            subTotal += item.getSubTotalItem();
+        }
+        return subTotal;
+    }
+    
+    public void displayCart() {
+        for (Item item : cart) {
+            System.out.println("nama  : " + item.getItemName());
+            System.out.println("cat   : " + item.getCategory());
+            System.out.println("price : " + item.getPrice());
+            System.out.println("qty   : " + item.getQty());
+        }
+    }
 }
