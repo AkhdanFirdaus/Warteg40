@@ -6,6 +6,10 @@
 package com.kelompok1b.warteg40.view.Auth;
 
 import com.kelompok1b.warteg40.controller.CartController;
+import com.kelompok1b.warteg40.controller.UserController;
+import com.kelompok1b.warteg40.view.HomeForm;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -138,12 +142,23 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
-        // TODO add your handling code here:
+        String username = username_label.getText();
+        String password = String.valueOf(password_label.getPassword());
+        UserController controller = UserController.getInstance();
+        boolean res = controller.login(username, password);
+        if (res) {
+            HomeForm homeForm = new HomeForm();
+            homeForm.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Gagal Login");
+            username_label.setText(null);
+            password_label.setText(null);
+        }
     }//GEN-LAST:event_login_buttonActionPerformed
 
     private void to_register_form_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_to_register_form_buttonActionPerformed
         RegisterForm register = new RegisterForm();
-        
         register.setVisible(true);
         this.dispose();
         // TODO add your handling code here:

@@ -13,13 +13,37 @@ import java.util.LinkedList;
  * @author akhda
  */
 public class UserController {
+    private static UserController instance = null;
     LinkedList<User> users = new LinkedList<User>();
     User loggedInUser;
+
+    public UserController() {
+        User admin = new User(0, "admin", "admin", 0);
+        users.add(admin);
+        System.out.println("Username : " + users.getLast().getName());
+        System.out.println("Password : " + users.getLast().getPassword());
+    }
+    
+    public static UserController getInstance() {
+        if(instance == null)
+            instance = new UserController();
+        return instance;
+    }
+
+    
+    public void setUser(User user) {
+        this.loggedInUser = user;
+    }
+    
+    public User getLoggedInUser() {
+        return this.loggedInUser;
+    }
     
     public boolean login(String username, String password) {
+        System.out.println("Pass : " + password);
         for (User foundUser : users) {
             if (foundUser.getName().equals(username) && foundUser.getPassword().equals(password)) {
-                loggedInUser = foundUser;
+                setUser(foundUser);
                 System.out.println("Sukses Login!");
                 return true;
                 //redirect dashboard
