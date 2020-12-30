@@ -16,7 +16,7 @@ public class User {
     private int role;
     
     //Admin
-    User(int id, String name, String password, int role) {
+    public User(int id, String name, String password, int role) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -24,14 +24,22 @@ public class User {
     }
     
     //Customer
-    User(int id, String name, int role) {
+    public User(int id, String name, int role) {
         this.id = id;
         this.name = name;
         this.role = role;
     }
     
+    public int getId() {
+        return this.id;
+    }
+    
     public String getName() {
         return this.name;
+    }
+    
+    public String getPassword() {
+        return this.password;
     }
     
     public int getRole() {
