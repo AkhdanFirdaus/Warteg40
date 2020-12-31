@@ -24,6 +24,7 @@ public class UserController {
         System.out.println("Password : " + users.getLast().getPassword());
     }
     
+    //Singleto
     public static UserController getInstance() {
         if(instance == null)
             instance = new UserController();
