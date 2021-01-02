@@ -202,6 +202,7 @@ public class HomeForm extends javax.swing.JFrame {
         panel_menu1.add(cmb_filter);
 
         textfield_find.setText("Ketik yang Ingin Dicari");
+        textfield_find.setToolTipText("Ketik yang Ingin Dicari");
         textfield_find.setMinimumSize(new java.awt.Dimension(240, 40));
         textfield_find.setPreferredSize(new java.awt.Dimension(240, 40));
         textfield_find.addActionListener(new java.awt.event.ActionListener() {
@@ -256,7 +257,10 @@ public class HomeForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void cmb_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filterActionPerformed
-        // TODO add your handling code here:
+        int type = cmb_filter.getSelectedIndex();
+        MenuController menuController = MenuController.getInstance();
+        System.out.print("Selected filter: " + type);
+        //panel_menu.repaint();
     }//GEN-LAST:event_cmb_filterActionPerformed
 
     private void btn_cartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cartActionPerformed

@@ -14,15 +14,27 @@ import java.util.LinkedList;
  * @author akhda
  */
 public class TransactionController {
-    LinkedList<Transaction> transactions = new LinkedList<Transaction>();
+    private static TransactionController instance = null;
+    private CartController cartController;
+    private LinkedList<Transaction> transactions = new LinkedList<Transaction>();
     
-    public boolean pay(int money) {
-        CartController cart = new CartController();
-        if (money >= cart.getSubTotal()) {
-            int lastId = transactions.getLast().getIdTransaction() + 1;
-            Transaction newTransaction = new Transaction(lastId, "Customer Name",  "Senin", money, cart.cart);
+    public TransactionController(CartController newCart) {
+        this.cartController = newCart;
+    }
+    
+    public static TransactionController getInstance(CartController newCart) {
+        if (instance == null)
+            instance = new TransactionController(newCart);
+        return instance;
+    }
+    
+    public boolean pay(String name, int money) {
+        if (money >= cartController.getSubTotal()) {
+            int lastId = transactions.isEmpty() ? 1 : transactions.getLast().getIdTransaction() + 1;
+            Transaction newTransaction = new Transaction(lastId, name,  "Senin", money, cartController.cart);
             transactions.add(newTransaction);
             System.out.println("Sukses transaksi!");
+            cartController.clearCart();
             return true;
         } else {
             System.out.println("Uang tidak cukup!");

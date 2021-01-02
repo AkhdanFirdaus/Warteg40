@@ -5,17 +5,26 @@
  */
 package com.kelompok1b.warteg40.view.Home;
 
+import com.kelompok1b.warteg40.controller.CartController;
+import com.kelompok1b.warteg40.controller.TransactionController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Raihan Adam
  */
 public class PaymentForm extends javax.swing.JFrame {
-
+    CartController cartController;
+    TransactionController transactionController;
     /**
      * Creates new form Payment
+     * @param newCartController
      */
-    public PaymentForm() {
+    public PaymentForm(CartController newCartController) {
         initComponents();
+        this.cartController = newCartController;
+        this.transactionController = TransactionController.getInstance(newCartController);
+        label_total.setText(String.valueOf(cartController.getSubTotal()));
     }
 
     /**
@@ -27,21 +36,115 @@ public class PaymentForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        label_total = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        textfield_nama = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        textfield_bayar = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        btn_bayar = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.PAGE_AXIS));
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 80));
+        jPanel1.setLayout(new java.awt.GridLayout(0, 1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Total");
+        jPanel1.add(jLabel2);
+
+        label_total.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        label_total.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_total.setText("Rp. 00000");
+        jPanel1.add(label_total);
+
+        getContentPane().add(jPanel1);
+
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jPanel4.setPreferredSize(new java.awt.Dimension(400, 20));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 328, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
         );
+
+        jPanel2.add(jPanel4);
+
+        textfield_nama.setText("Nama");
+        textfield_nama.setMargin(new java.awt.Insets(6, 6, 6, 6));
+        jPanel2.add(textfield_nama);
+
+        jPanel6.setPreferredSize(new java.awt.Dimension(400, 20));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 328, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel6);
+
+        textfield_bayar.setText("Bayar");
+        textfield_bayar.setMargin(new java.awt.Insets(6, 6, 6, 6));
+        jPanel2.add(textfield_bayar);
+
+        jPanel5.setPreferredSize(new java.awt.Dimension(328, 20));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 328, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel5);
+
+        jPanel3.setLayout(new java.awt.CardLayout());
+
+        btn_bayar.setText("Bayar");
+        btn_bayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_bayarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btn_bayar, "card2");
+
+        jPanel2.add(jPanel3);
+
+        getContentPane().add(jPanel2);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_bayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bayarActionPerformed
+        boolean res = transactionController.pay(textfield_nama.getText(), Integer.parseInt(textfield_bayar.getText()));
+        if (res)
+            JOptionPane.showMessageDialog(this, "Sukses");
+        else 
+            JOptionPane.showMessageDialog(this, "Gagal");
+    }//GEN-LAST:event_btn_bayarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -72,13 +175,24 @@ public class PaymentForm extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PaymentForm().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new PaymentForm().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_bayar;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel label_total;
+    private javax.swing.JTextField textfield_bayar;
+    private javax.swing.JTextField textfield_nama;
     // End of variables declaration//GEN-END:variables
 }

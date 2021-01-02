@@ -23,7 +23,7 @@ public class Transaction {
         this.customerName = customerName;
         this.date = date;
         this.paidMoney = paidMoney;
-        this.orderedItem = orderedItem;
+        this.orderedItem.addAll(orderedItem);
     }
     
     public int getIdTransaction() {
