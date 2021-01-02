@@ -37,4 +37,14 @@ public class MenuController {
     public ArrayList<Item> getMenus() {
         return this.menus;
     }
+    
+    public ArrayList<Item> sort_des() {
+        
+        return this.menus;
+    }
+    
+    public ArrayList<Item> sort_asc() {
+        
+        return this.menus;
+    }
 }
