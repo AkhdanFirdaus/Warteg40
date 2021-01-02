@@ -34,12 +34,20 @@ public class Transaction {
         return this.customerName;
     }
     
+    public String getDate() {
+        return this.date;
+    }
+    
     public ArrayList<Item> getOrderedItem() {
         return this.orderedItem;
     }
     
     public int getPaidMoney() {
         return this.paidMoney;
+    }
+    
+    public int getCountOrderedItem() {
+        return this.orderedItem.size();
     }
     
     public int getSubTotal() {

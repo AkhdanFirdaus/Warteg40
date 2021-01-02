@@ -140,8 +140,10 @@ public class PaymentForm extends javax.swing.JFrame {
 
     private void btn_bayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bayarActionPerformed
         boolean res = transactionController.pay(textfield_nama.getText(), Integer.parseInt(textfield_bayar.getText()));
-        if (res)
+        if (res) {
             JOptionPane.showMessageDialog(this, "Sukses");
+            this.dispose();
+        }
         else 
             JOptionPane.showMessageDialog(this, "Gagal");
     }//GEN-LAST:event_btn_bayarActionPerformed

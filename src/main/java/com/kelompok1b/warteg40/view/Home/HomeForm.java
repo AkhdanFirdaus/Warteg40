@@ -9,6 +9,7 @@ import com.kelompok1b.warteg40.controller.CartController;
 import com.kelompok1b.warteg40.controller.MenuController;
 import com.kelompok1b.warteg40.controller.UserController;
 import com.kelompok1b.warteg40.model.Item;
+import com.kelompok1b.warteg40.view.Admin.DashboardForm;
 import com.kelompok1b.warteg40.view.Auth.LoginForm;
 import com.kelompok1b.warteg40.view.Home.Widget.GridMenu;
 import java.awt.GridLayout;
@@ -34,6 +35,9 @@ public class HomeForm extends javax.swing.JFrame {
             btn_logout.setText("Login");
         } else {
             label_name.setText("Welcome " + userController.getLoggedInUser().getName());
+            if (userController.getLoggedInUser().getRole() != 0) {
+                btn_dashboard.setVisible(false);
+            }
         }
         
         panel_menu.setLayout(new GridLayout(3, 3));
@@ -56,11 +60,14 @@ public class HomeForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
         label_name = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        btn_menu_makanan = new javax.swing.JButton();
+        btn_menu_minuman = new javax.swing.JButton();
+        btn_menu_tambahan = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        btn_dashboard = new javax.swing.JButton();
         panel_content = new javax.swing.JPanel();
         panel_menu1 = new java.awt.Panel();
         cmb_filter = new javax.swing.JComboBox<>();
@@ -101,12 +108,12 @@ public class HomeForm extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                     .addComponent(btn_logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,6 +130,7 @@ public class HomeForm extends javax.swing.JFrame {
         label_name.getAccessibleContext().setAccessibleName("label_name");
 
         panel_sidebar.add(jPanel3);
+        panel_sidebar.add(jSeparator3);
 
         jPanel4.setBackground(new java.awt.Color(255, 200, 200));
         jPanel4.setPreferredSize(new java.awt.Dimension(340, 600));
@@ -131,27 +139,35 @@ public class HomeForm extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Menu");
 
-        jButton6.setText("Makanan");
-        jButton6.setPreferredSize(new java.awt.Dimension(75, 30));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btn_menu_makanan.setText("Makanan");
+        btn_menu_makanan.setPreferredSize(new java.awt.Dimension(75, 30));
+        btn_menu_makanan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btn_menu_makananActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Minuman");
-        jButton9.setPreferredSize(new java.awt.Dimension(75, 30));
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btn_menu_minuman.setText("Minuman");
+        btn_menu_minuman.setPreferredSize(new java.awt.Dimension(75, 30));
+        btn_menu_minuman.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btn_menu_minumanActionPerformed(evt);
             }
         });
 
-        jButton10.setText("Tambahan");
-        jButton10.setPreferredSize(new java.awt.Dimension(75, 30));
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        btn_menu_tambahan.setText("Tambahan");
+        btn_menu_tambahan.setPreferredSize(new java.awt.Dimension(75, 30));
+        btn_menu_tambahan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                btn_menu_tambahanActionPerformed(evt);
+            }
+        });
+
+        btn_dashboard.setText("Dashboard");
+        btn_dashboard.setPreferredSize(new java.awt.Dimension(75, 30));
+        btn_dashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dashboardActionPerformed(evt);
             }
         });
 
@@ -159,13 +175,15 @@ public class HomeForm extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                    .addComponent(btn_menu_makanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_menu_minuman, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(btn_menu_tambahan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(btn_dashboard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -174,12 +192,16 @@ public class HomeForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_menu_makanan, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_menu_minuman, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addComponent(btn_menu_tambahan, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         panel_sidebar.add(jPanel4);
@@ -252,9 +274,9 @@ public class HomeForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btn_menu_makananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menu_makananActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btn_menu_makananActionPerformed
 
     private void cmb_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filterActionPerformed
         int type = cmb_filter.getSelectedIndex();
@@ -276,13 +298,19 @@ public class HomeForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_findActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void btn_menu_minumanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menu_minumanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_btn_menu_minumanActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void btn_menu_tambahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menu_tambahanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_btn_menu_tambahanActionPerformed
+
+    private void btn_dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dashboardActionPerformed
+        DashboardForm dash = new DashboardForm();
+        dash.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_dashboardActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,16 +350,19 @@ public class HomeForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cart;
+    private javax.swing.JButton btn_dashboard;
     private javax.swing.JButton btn_find;
     private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_menu_makanan;
+    private javax.swing.JButton btn_menu_minuman;
+    private javax.swing.JButton btn_menu_tambahan;
     private javax.swing.JComboBox<String> cmb_filter;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel label_name;
     private javax.swing.JPanel panel_content;
     private java.awt.Panel panel_menu;

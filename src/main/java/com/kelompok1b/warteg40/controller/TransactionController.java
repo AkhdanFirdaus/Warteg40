@@ -42,6 +42,10 @@ public class TransactionController {
         }
     }
     
+    public LinkedList<Transaction> getTransactions() {
+        return this.transactions;
+    } 
+    
     public void displayTransaction() {
         for (Transaction transaction : transactions) {
             System.out.println("nama      : " + transaction.getCustomerName());
