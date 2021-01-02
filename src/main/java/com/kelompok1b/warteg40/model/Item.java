@@ -15,7 +15,7 @@ public class Item {
     private String foodName;
     private int category;
     private int price;
-    private int qty = 0;
+    private int qty = 1;
     
     public Item(int id, String foodName, int price, int category) {
         this.id = id;

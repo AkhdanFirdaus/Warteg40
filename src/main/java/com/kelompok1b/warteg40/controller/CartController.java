@@ -13,29 +13,29 @@ import java.util.ArrayList;
  * @author akhda
  */
 public class CartController {
+    private static CartController instance = null;
     ArrayList<Item> cart = new ArrayList<Item>();
     
+    public static CartController getInstance() {
+        if (instance == null)
+            return new CartController();
+        return instance;
+    }
+    
     public void addToCart(Item item) {
-        int length = cart.size()-1;
-        //length = 4
-        //id = 5
-        for (int i = 0; i<length; i++) {
-            if (cart.get(i).getId() == item.getId()) {
-                Item newItem = cart.get(i);
-                newItem.plusQty();
-                cart.set(i, newItem);
-                break;
-            } 
-            if ( i > length ){
-                cart.add(item);
-                break;
-            }
+        if (cart.contains(item)) {
+            cart.get(cart.indexOf(item)).plusQty();
+            System.out.println("qty item ditambah");
+        } else {
+            cart.add(item);
+            System.out.println("item ditambah");   
         }
+        displayCart();
     }
     
     public void minItem(Item item) {
         if (item.getQty() > 1) {
-            cart.get(item.getId()).minQty();
+            cart.get(cart.indexOf(item)).minQty();
         } else {
             cart.remove(item);
         }
@@ -53,12 +53,20 @@ public class CartController {
         return subTotal;
     }
     
+    public ArrayList<Item> getCart() {
+        return this.cart;
+    }
+    
     public void displayCart() {
-        for (Item item : cart) {
-            System.out.println("nama  : " + item.getItemName());
-            System.out.println("cat   : " + item.getCategory());
-            System.out.println("price : " + item.getPrice());
-            System.out.println("qty   : " + item.getQty());
+        if (cart.isEmpty()) {
+            System.out.println("Cart Kosong");
+        } else {
+            for (Item item : cart) {
+                System.out.println("nama  : " + item.getItemName());
+                System.out.println("cat   : " + item.getCategory());
+                System.out.println("price : " + item.getPrice());
+                System.out.println("qty   : " + item.getQty());
+            }
         }
     }
 }

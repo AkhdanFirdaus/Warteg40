@@ -5,6 +5,7 @@
  */
 package com.kelompok1b.warteg40.view.Home.Widget;
 
+import com.kelompok1b.warteg40.controller.CartController;
 import com.kelompok1b.warteg40.model.Item;
 
 /**
@@ -13,13 +14,15 @@ import com.kelompok1b.warteg40.model.Item;
  */
 public class GridMenu extends javax.swing.JPanel {
     private Item item;
+    CartController cartController;
 
     /**
      * Creates new form GridMenu
      * @param newItem
      */
-    public GridMenu(Item newItem) {
+    public GridMenu(Item newItem, CartController cartController) {
         initComponents();
+        this.cartController = cartController;
         this.item = newItem;
         label_nama.setText(item.getItemName());
         label_kategori.setText(String.valueOf(item.getCategory()));
@@ -40,6 +43,11 @@ public class GridMenu extends javax.swing.JPanel {
         label_harga = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(120, 80));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
         label_nama.setText("Nama");
@@ -51,6 +59,10 @@ public class GridMenu extends javax.swing.JPanel {
         label_harga.setText("Harga");
         add(label_harga);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        cartController.addToCart(item);
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

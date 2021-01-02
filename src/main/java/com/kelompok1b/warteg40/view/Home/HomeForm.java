@@ -5,6 +5,7 @@
  */
 package com.kelompok1b.warteg40.view.Home;
 
+import com.kelompok1b.warteg40.controller.CartController;
 import com.kelompok1b.warteg40.controller.MenuController;
 import com.kelompok1b.warteg40.controller.UserController;
 import com.kelompok1b.warteg40.model.Item;
@@ -20,12 +21,15 @@ import javax.swing.BoxLayout;
 public class HomeForm extends javax.swing.JFrame {
     UserController userController;
     MenuController menuController;
+    CartController cartController;
     /**
      * Creates new form Home
      */
     public HomeForm() {
         initComponents();
         userController = UserController.getInstance();
+        cartController = CartController.getInstance();
+        
         if (userController.getLoggedInUser() == null) {
             btn_logout.setText("Login");
         } else {
@@ -35,7 +39,7 @@ public class HomeForm extends javax.swing.JFrame {
         panel_menu.setLayout(new GridLayout(3, 3));
         menuController = MenuController.getInstance();
         for (Item item : menuController.getMenus())
-            panel_menu.add(new GridMenu(item));
+            panel_menu.add(new GridMenu(item, cartController));
     }
 
     /**
@@ -256,7 +260,7 @@ public class HomeForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cmb_filterActionPerformed
 
     private void btn_cartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cartActionPerformed
-        CartForm cartForm = new CartForm();
+        CartForm cartForm = new CartForm(cartController);
         cartForm.setVisible(true);
     }//GEN-LAST:event_btn_cartActionPerformed
 

@@ -5,18 +5,34 @@
  */
 package com.kelompok1b.warteg40.view.Home;
 
+import com.kelompok1b.warteg40.controller.CartController;
+import com.kelompok1b.warteg40.model.Item;
+import com.kelompok1b.warteg40.view.Home.Widget.CartItemPanel;
+import java.awt.GridLayout;
+import javax.swing.BoxLayout;
+
 /**
  *
  * @author Raihan Adam
  */
 public class CartForm extends javax.swing.JFrame {
+    CartController cartController;
 
     /**
      * Creates new form Checkout
+     * @param cartController
      */
-    public CartForm() {
+    public CartForm(CartController newController) {
         initComponents();
+        this.cartController = newController;
+        cart_panel.setLayout(new BoxLayout(cart_panel, BoxLayout.Y_AXIS));
+        for (Item item : cartController.getCart()) {
+            cart_panel.add(new CartItemPanel(item, cartController));
+        }
+        System.out.println("Constructor CartForm");
+            
     }
+       
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,11 +44,11 @@ public class CartForm extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_checkout = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scroll_cart = new javax.swing.JScrollPane();
+        cart_panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setResizable(false);
 
         btn_checkout.setText("Checkout");
@@ -41,6 +57,19 @@ public class CartForm extends javax.swing.JFrame {
                 btn_checkoutActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout cart_panelLayout = new javax.swing.GroupLayout(cart_panel);
+        cart_panel.setLayout(cart_panelLayout);
+        cart_panelLayout.setHorizontalGroup(
+            cart_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 317, Short.MAX_VALUE)
+        );
+        cart_panelLayout.setVerticalGroup(
+            cart_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 256, Short.MAX_VALUE)
+        );
+
+        scroll_cart.setViewportView(cart_panel);
 
         jLabel1.setText("Keranjang");
 
@@ -51,7 +80,7 @@ public class CartForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(scroll_cart)
                     .addComponent(btn_checkout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -65,7 +94,7 @@ public class CartForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scroll_cart, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_checkout, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -109,16 +138,17 @@ public class CartForm extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CartForm().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CartForm().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_checkout;
+    private javax.swing.JPanel cart_panel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane scroll_cart;
     // End of variables declaration//GEN-END:variables
 }

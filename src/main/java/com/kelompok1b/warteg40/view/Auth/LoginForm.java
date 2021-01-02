@@ -164,6 +164,10 @@ public class LoginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_to_register_form_buttonActionPerformed
 
+    //parentPanel.removeAll();
+    //parentPanel.add(newPanel);
+    //parentPanel.repaint();
+    //parentPanel.revalidate();
     /**
      * @param args the command line arguments
      */
