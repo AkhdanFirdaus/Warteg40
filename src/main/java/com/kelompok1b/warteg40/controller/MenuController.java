@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class MenuController {
     public static MenuController instance = null;
-    ArrayList<Item> menus = new ArrayList<Item>();
+    private ArrayList<Item> menus = new ArrayList<Item>();
     
     public MenuController() {
         menus.add(new Item(0, "Nasi Goreng", 14000, 1));

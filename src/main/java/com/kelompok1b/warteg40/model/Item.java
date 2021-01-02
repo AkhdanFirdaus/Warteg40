@@ -32,6 +32,19 @@ public class Item {
         return this.foodName;
     }
     
+    public String getNameCategory() {
+        switch(this.category) {
+            case 1:
+                return "Makanan";
+            case 2:
+                return "Minuman";
+            case 3:
+                return "Tambahan";
+            default:
+                return "Tidak Ada";
+        }
+    }
+    
     public int getCategory() {
         return this.category;
     }

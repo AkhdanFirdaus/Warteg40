@@ -5,17 +5,58 @@
  */
 package com.kelompok1b.warteg40.view.Admin.widget;
 
+import com.kelompok1b.warteg40.controller.MenuController;
+import com.kelompok1b.warteg40.view.Admin.CreateForm;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author akhda
  */
 public class MenuPanel extends javax.swing.JPanel {
+    private MenuController menuController;
 
     /**
      * Creates new form MenuPanel
      */
     public MenuPanel() {
         initComponents();
+        menuController = MenuController.getInstance();
+        tampilData();
+    }
+    
+    public void tampilData() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Nama");
+        model.addColumn("Kategory");
+        model.addColumn("Harga");
+        
+        //menampilkan data database kedalam tabel
+        try {
+//            Iterator transactions = transactionController.getTransactions().iterator();
+//            while(transactions.hasNext()){
+//                Transaction transaction = (Transaction) transactions.next();
+//                model.addRow(new Object[]{
+//                    transaction.getIdTransaction(),
+//                    transaction.getCustomerName(),
+//                    transaction.getDate(),
+//                    transaction.getPaidMoney(),
+//                    transaction.getChangeMoney(),
+//                    transaction.getCountOrderedItem()
+//                });
+//            }
+             menuController.getMenus().forEach(menu -> {
+                 model.addRow(new Object[]{
+                    menu.getId(),
+                    menu.getItemName(),
+                    menu.getNameCategory(),
+                    menu.getPrice(),
+                });
+             });
+            table_menu.setModel(model);
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -31,8 +72,9 @@ public class MenuPanel extends javax.swing.JPanel {
         cmb_filter = new javax.swing.JComboBox<>();
         textfield_find = new javax.swing.JTextField();
         btn_find = new javax.swing.JButton();
+        btn_add = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_menu = new javax.swing.JTable();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
@@ -69,9 +111,20 @@ public class MenuPanel extends javax.swing.JPanel {
         });
         panel_menu1.add(btn_find);
 
+        btn_add.setText("Tambah");
+        btn_add.setMaximumSize(new java.awt.Dimension(80, 40));
+        btn_add.setMinimumSize(new java.awt.Dimension(80, 40));
+        btn_add.setPreferredSize(new java.awt.Dimension(80, 40));
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addActionPerformed(evt);
+            }
+        });
+        panel_menu1.add(btn_add);
+
         add(panel_menu1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_menu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -90,7 +143,7 @@ public class MenuPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table_menu);
 
         add(jScrollPane1);
     }// </editor-fold>//GEN-END:initComponents
@@ -107,13 +160,20 @@ public class MenuPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_findActionPerformed
 
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        CreateForm createForm = new CreateForm();
+        createForm.setVisible(true);
+    // TODO add your handling code here:
+    }//GEN-LAST:event_btn_addActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_find;
     private javax.swing.JComboBox<String> cmb_filter;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private java.awt.Panel panel_menu1;
+    private javax.swing.JTable table_menu;
     private javax.swing.JTextField textfield_find;
     // End of variables declaration//GEN-END:variables
 }
