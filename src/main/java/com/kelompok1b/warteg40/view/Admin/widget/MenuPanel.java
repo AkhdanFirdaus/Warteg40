@@ -7,6 +7,7 @@ package com.kelompok1b.warteg40.view.Admin.widget;
 
 import com.kelompok1b.warteg40.controller.MenuController;
 import com.kelompok1b.warteg40.view.Admin.CreateForm;
+import com.kelompok1b.warteg40.view.Admin.EditForm;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -73,6 +74,7 @@ public class MenuPanel extends javax.swing.JPanel {
         textfield_find = new javax.swing.JTextField();
         btn_find = new javax.swing.JButton();
         btn_add = new javax.swing.JButton();
+        btn_edit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_menu = new javax.swing.JTable();
 
@@ -122,6 +124,17 @@ public class MenuPanel extends javax.swing.JPanel {
         });
         panel_menu1.add(btn_add);
 
+        btn_edit.setText("Edit");
+        btn_edit.setMaximumSize(new java.awt.Dimension(80, 40));
+        btn_edit.setMinimumSize(new java.awt.Dimension(80, 40));
+        btn_edit.setPreferredSize(new java.awt.Dimension(80, 40));
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
+        panel_menu1.add(btn_edit);
+
         add(panel_menu1);
 
         table_menu.setModel(new javax.swing.table.DefaultTableModel(
@@ -166,9 +179,16 @@ public class MenuPanel extends javax.swing.JPanel {
     // TODO add your handling code here:
     }//GEN-LAST:event_btn_addActionPerformed
 
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        EditForm editForm = new EditForm();
+        editForm.setVisible(true);
+    // TODO add your handling code here:
+    }//GEN-LAST:event_btn_editActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add;
+    private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_find;
     private javax.swing.JComboBox<String> cmb_filter;
     private javax.swing.JScrollPane jScrollPane1;

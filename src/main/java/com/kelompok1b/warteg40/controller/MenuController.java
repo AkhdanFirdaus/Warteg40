@@ -28,6 +28,19 @@ public class MenuController {
         menus.add(new Item(7, "Kerupuk", 2000, 3));
     }
     
+    
+    public boolean addMenu(String foodName, int category, int price) {
+        int lastId = menus.isEmpty() ? 1 : menus.get(menus.size()).getId() - 1;
+        System.out.println(lastId);
+        System.out.println(foodName);
+        System.out.println(category);
+        System.out.println(price);
+//        Item newItem = new Item(lastId, foodName, category, price);
+//        menus.add(newItem);
+        System.out.println("Menu telah ditambahkan");
+        return true;
+    }
+    
     public static MenuController getInstance() {
         if(instance == null)
             instance = new MenuController();
