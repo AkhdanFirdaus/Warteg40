@@ -18,27 +18,14 @@ public class MenuController {
     private ArrayList<Item> menus = new ArrayList<Item>();
     
     public MenuController() {
-        menus.add(new Item(0, "Nasi Goreng", 14000, 1));
-        menus.add(new Item(1, "Nasi Kuning", 8000, 1));
-        menus.add(new Item(2, "Nasi Uduk", 8000, 1));
-        menus.add(new Item(3, "Mie Goreng", 7000, 1));
-        menus.add(new Item(4, "Mie Kuah", 6000, 1));
-        menus.add(new Item(5, "Es Buah", 12000, 2));
-        menus.add(new Item(6, "Jus Buah", 12000, 2));
-        menus.add(new Item(7, "Kerupuk", 2000, 3));
-    }
-    
-    
-    public boolean addMenu(String foodName, int category, int price) {
-        int lastId = menus.isEmpty() ? 1 : menus.get(menus.size()).getId() - 1;
-        System.out.println(lastId);
-        System.out.println(foodName);
-        System.out.println(category);
-        System.out.println(price);
-//        Item newItem = new Item(lastId, foodName, category, price);
-//        menus.add(newItem);
-        System.out.println("Menu telah ditambahkan");
-        return true;
+        menus.add(new Item(0, "Nasi Goreng", 1, 14000));
+        menus.add(new Item(1, "Nasi Kuning", 1, 8000));
+        menus.add(new Item(2, "Nasi Uduk", 1, 8000));
+        menus.add(new Item(3, "Mie Goreng", 1, 7000));
+        menus.add(new Item(4, "Mie Kuah", 1, 6000));
+        menus.add(new Item(5, "Es Buah", 2, 12000));
+        menus.add(new Item(6, "Jus Buah", 2, 12000));
+        menus.add(new Item(7, "Kerupuk", 3, 2000));
     }
     
     public static MenuController getInstance() {
@@ -47,17 +34,50 @@ public class MenuController {
         return instance;
     }
     
+    public boolean addMenu(String foodName, int category, float price) {
+        int lastId = menus.isEmpty() ? 1 : menus.get(menus.size() - 1).getId() + 1;
+        Item newItem = new Item(lastId, foodName, category, price);
+        menus.add(newItem);
+        System.out.println("Menu telah ditambahkan");
+        
+        return true;
+    }
+    
+    public boolean editMenu(int id, String foodName, int category, float price) {
+        Item newItem = menus.set(id, new Item(id, foodName, category, price));
+        System.out.println("Menu telah di update");
+        return true;
+    }
+    
+    public boolean deleteMenu(int id) {
+        menus.remove(id);
+        return true;
+    }
+    
     public ArrayList<Item> getMenus() {
         return this.menus;
     }
     
-    public ArrayList<Item> sort_des() {
-        
+    public ArrayList<Item> sort(int type) {
+//        none, Nama, Kategori, Harga
+//        switch (type) {
+//            case 0:
+//                sort
+//        }
         return this.menus;
     }
     
     public ArrayList<Item> sort_asc() {
         
         return this.menus;
+    }
+    
+    public void displayMenu() {
+        for (Item item : this.menus) {
+            System.out.println("ID   = " + item.getId());
+            System.out.println("Nama = " + item.getItemName());
+            System.out.println("Harga= " + item.getPrice());
+            System.out.println("Kat  = " + item.getNameCategory());
+        }
     }
 }

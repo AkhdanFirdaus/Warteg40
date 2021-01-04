@@ -20,8 +20,6 @@ public class UserController {
     public UserController() {
         User admin = new User(0, "admin", "admin", 0);
         users.add(admin);
-        System.out.println("Username : " + users.getLast().getName());
-        System.out.println("Password : " + users.getLast().getPassword());
     }
     
     //Singleto

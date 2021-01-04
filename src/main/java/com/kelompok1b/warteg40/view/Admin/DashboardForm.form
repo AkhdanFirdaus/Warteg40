@@ -55,13 +55,13 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="83" max="32767" attributes="0"/>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="label_name" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel2" alignment="1" pref="126" max="32767" attributes="0"/>
+                          <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
                           <Component id="btn_logout" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="82" max="32767" attributes="0"/>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -128,9 +128,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" max="32767" attributes="0"/>
                           <Component id="jButton6" max="32767" attributes="0"/>
-                          <Component id="jButton9" alignment="0" pref="271" max="32767" attributes="0"/>
+                          <Component id="jButton9" alignment="0" pref="128" max="32767" attributes="0"/>
                           <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
-                          <Component id="btn_order" alignment="0" pref="271" max="32767" attributes="0"/>
+                          <Component id="btn_order" alignment="0" pref="128" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

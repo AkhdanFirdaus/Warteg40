@@ -14,14 +14,14 @@ public class Item {
     private int id;
     private String foodName;
     private int category;
-    private int price;
+    private float price;
     private int qty = 1;
     
-    public Item(int id, String foodName, int price, int category) {
+    public Item(int id, String foodName, int category, float price) {
         this.id = id;
         this.foodName = foodName;
-        this.price = price;
         this.category = category;
+        this.price = price;
     }
     
     public int getId() {
@@ -53,11 +53,11 @@ public class Item {
         return this.qty;
     }
     
-    public int getPrice() {
+    public float getPrice() {
         return this.price;
     }
     
-    public int getSubTotalItem() {
+    public float getSubTotalItem() {
         return this.price * this.qty;
     }
     
@@ -67,5 +67,12 @@ public class Item {
     
     public void minQty() {
         this.qty--;
+    }
+    
+    public void displayItem() {
+        System.out.println(this.getId());
+        System.out.println(this.getItemName());
+        System.out.println(this.getCategory());
+        System.out.println(this.getPrice());
     }
 }

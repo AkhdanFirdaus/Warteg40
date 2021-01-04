@@ -37,18 +37,6 @@ public class TransactionPanel extends javax.swing.JPanel {
         
         //menampilkan data database kedalam tabel
         try {
-//            Iterator transactions = transactionController.getTransactions().iterator();
-//            while(transactions.hasNext()){
-//                Transaction transaction = (Transaction) transactions.next();
-//                model.addRow(new Object[]{
-//                    transaction.getIdTransaction(),
-//                    transaction.getCustomerName(),
-//                    transaction.getDate(),
-//                    transaction.getPaidMoney(),
-//                    transaction.getChangeMoney(),
-//                    transaction.getCountOrderedItem()
-//                });
-//            }
              transactionController.getTransactions().forEach(transaction -> {
                  model.addRow(new Object[]{
                     transaction.getIdTransaction(),

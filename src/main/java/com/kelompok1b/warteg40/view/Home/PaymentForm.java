@@ -7,6 +7,7 @@ package com.kelompok1b.warteg40.view.Home;
 
 import com.kelompok1b.warteg40.controller.CartController;
 import com.kelompok1b.warteg40.controller.TransactionController;
+import com.kelompok1b.warteg40.controller.UserController;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 public class PaymentForm extends javax.swing.JFrame {
     CartController cartController;
     TransactionController transactionController;
+    UserController userController;
     /**
      * Creates new form Payment
      * @param newCartController
@@ -24,7 +26,11 @@ public class PaymentForm extends javax.swing.JFrame {
         initComponents();
         this.cartController = newCartController;
         this.transactionController = TransactionController.getInstance(newCartController);
+        this.userController = UserController.getInstance();
         label_total.setText(String.valueOf(cartController.getSubTotal()));
+        if (userController.getLoggedInUser() != null)  {
+            textfield_nama.setText(userController.getLoggedInUser().getName());
+        }
     }
 
     /**
@@ -139,7 +145,9 @@ public class PaymentForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_bayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bayarActionPerformed
-        boolean res = transactionController.pay(textfield_nama.getText(), Integer.parseInt(textfield_bayar.getText()));
+        String name = textfield_nama.getText();
+        int pay = Integer.parseInt(textfield_bayar.getText());
+        boolean res = transactionController.pay(name, pay);
         if (res) {
             JOptionPane.showMessageDialog(this, "Sukses");
             this.dispose();

@@ -25,7 +25,7 @@ public class GridMenu extends javax.swing.JPanel {
         this.cartController = cartController;
         this.item = newItem;
         label_nama.setText(item.getItemName());
-        label_kategori.setText(String.valueOf(item.getCategory()));
+        label_kategori.setText(item.getNameCategory());
         label_harga.setText(String.valueOf(item.getPrice()));
     }
 

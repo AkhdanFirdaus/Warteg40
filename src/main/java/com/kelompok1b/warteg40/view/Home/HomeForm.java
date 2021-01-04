@@ -30,16 +30,20 @@ public class HomeForm extends javax.swing.JFrame {
         initComponents();
         userController = UserController.getInstance();
         cartController = CartController.getInstance();
-        
+        btn_dashboard.setVisible(false);
         if (userController.getLoggedInUser() == null) {
             btn_logout.setText("Login");
         } else {
             label_name.setText("Welcome " + userController.getLoggedInUser().getName());
-            if (userController.getLoggedInUser().getRole() != 0) {
-                btn_dashboard.setVisible(false);
+            if (userController.getLoggedInUser().getRole() == 0) {
+                btn_dashboard.setVisible(true);
             }
         }
         
+        tampilMenu();
+    }
+    
+    public void tampilMenu() {
         panel_menu.setLayout(new GridLayout(3, 3));
         menuController = MenuController.getInstance();
         for (Item item : menuController.getMenus())
