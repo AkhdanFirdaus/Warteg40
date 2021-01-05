@@ -7,12 +7,19 @@ package com.kelompok1b.warteg40.view.Home;
 
 import com.kelompok1b.warteg40.controller.CartController;
 import com.kelompok1b.warteg40.controller.MenuController;
+import com.kelompok1b.warteg40.controller.Searching;
 import com.kelompok1b.warteg40.controller.UserController;
 import com.kelompok1b.warteg40.model.Item;
 import com.kelompok1b.warteg40.view.Admin.DashboardForm;
 import com.kelompok1b.warteg40.view.Auth.LoginForm;
-import com.kelompok1b.warteg40.view.Home.Widget.GridMenu;
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -44,34 +51,26 @@ public class HomeForm extends javax.swing.JFrame {
     
     public void tampilMenu() {
         panel_menu.removeAll();
-        panel_menu.setLayout(new GridLayout(3, 3));
+        panel_menu.setLayout(new GridLayout(4, 3));
         menuController = MenuController.getInstance();
-        for (Item item : menuController.getMenus())
-            panel_menu.add(new GridMenu(item, cartController));
+        for (Item item : menuController.getMenus()) {
+            JPanel gridItem = new JPanel();
+            gridItem.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            gridItem.add(new Label(item.getItemName()));
+            gridItem.add(new Label(item.getNameCategory()));
+            gridItem.add(new Label(String.valueOf(item.getPrice())));
+            panel_menu.add(gridItem);
+            gridItem.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    cartController.addToCart(item);
+                }
+            });;
+        }
         panel_menu.repaint();
         panel_menu.revalidate();
         btn_find.setText("Cari");
         
-    }
-    
-    public void searchMenu() {
-        boolean found = false;
-        String keyword = textfield_find.getText();
-        btn_find.setText("Clear");
-        panel_menu.removeAll();
-        for (Item item : menuController.getMenus()) {
-            if (item.getItemName().equalsIgnoreCase(keyword)) {
-                panel_menu.add(new GridMenu(item, cartController));
-                found = true;
-            }
-        }
-        if (found) {
-            btn_find.setText("Clear");
-            panel_menu.repaint();
-            panel_menu.revalidate();
-        } else {
-            tampilMenu();
-        }
     }
 
     /**
@@ -92,8 +91,6 @@ public class HomeForm extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         btn_menu_makanan = new javax.swing.JButton();
-        btn_menu_minuman = new javax.swing.JButton();
-        btn_menu_tambahan = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         btn_dashboard = new javax.swing.JButton();
         panel_content = new javax.swing.JPanel();
@@ -102,10 +99,11 @@ public class HomeForm extends javax.swing.JFrame {
         textfield_find = new javax.swing.JTextField();
         btn_find = new javax.swing.JButton();
         btn_cart = new javax.swing.JButton();
-        scroll_menu = new javax.swing.JScrollPane();
         panel_menu = new java.awt.Panel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -135,12 +133,12 @@ public class HomeForm extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                     .addComponent(btn_logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,29 +164,8 @@ public class HomeForm extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Menu");
 
-        btn_menu_makanan.setText("Makanan");
+        btn_menu_makanan.setText("Pesanan Saya");
         btn_menu_makanan.setPreferredSize(new java.awt.Dimension(75, 30));
-        btn_menu_makanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_menu_makananActionPerformed(evt);
-            }
-        });
-
-        btn_menu_minuman.setText("Minuman");
-        btn_menu_minuman.setPreferredSize(new java.awt.Dimension(75, 30));
-        btn_menu_minuman.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_menu_minumanActionPerformed(evt);
-            }
-        });
-
-        btn_menu_tambahan.setText("Tambahan");
-        btn_menu_tambahan.setPreferredSize(new java.awt.Dimension(75, 30));
-        btn_menu_tambahan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_menu_tambahanActionPerformed(evt);
-            }
-        });
 
         btn_dashboard.setText("Dashboard");
         btn_dashboard.setPreferredSize(new java.awt.Dimension(75, 30));
@@ -208,9 +185,7 @@ public class HomeForm extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_menu_makanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_menu_minuman, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                    .addComponent(btn_menu_tambahan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                    .addComponent(btn_dashboard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+                    .addComponent(btn_dashboard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -220,11 +195,7 @@ public class HomeForm extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(btn_menu_makanan, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_menu_minuman, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_menu_tambahan, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(150, 150, 150)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,11 +225,6 @@ public class HomeForm extends javax.swing.JFrame {
         textfield_find.setToolTipText("Ketik yang Ingin Dicari");
         textfield_find.setMinimumSize(new java.awt.Dimension(240, 40));
         textfield_find.setPreferredSize(new java.awt.Dimension(240, 40));
-        textfield_find.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfield_findActionPerformed(evt);
-            }
-        });
         panel_menu1.add(textfield_find);
 
         btn_find.setText("Cari");
@@ -283,11 +249,9 @@ public class HomeForm extends javax.swing.JFrame {
 
         panel_content.add(panel_menu1);
 
-        panel_menu.setPreferredSize(new java.awt.Dimension(590, 600));
+        panel_menu.setPreferredSize(new java.awt.Dimension(590, 800));
         panel_menu.setLayout(new java.awt.GridBagLayout());
-        scroll_menu.setViewportView(panel_menu);
-
-        panel_content.add(scroll_menu);
+        panel_content.add(panel_menu);
 
         getContentPane().add(panel_content);
 
@@ -301,10 +265,6 @@ public class HomeForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    private void btn_menu_makananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menu_makananActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_menu_makananActionPerformed
-
     private void cmb_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filterActionPerformed
         int type = cmb_filter.getSelectedIndex();
         System.out.print("Selected filter: " + type);
@@ -317,30 +277,26 @@ public class HomeForm extends javax.swing.JFrame {
         cartForm.setVisible(true);
     }//GEN-LAST:event_btn_cartActionPerformed
 
-    private void textfield_findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_findActionPerformed
-        if (btn_find.getText().contains("Clear")) {
-          tampilMenu();
-          textfield_find.setText(null);
-        } else
-            searchMenu();
-    }//GEN-LAST:event_textfield_findActionPerformed
-
     private void btn_findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_findActionPerformed
         if (btn_find.getText().contains("Clear")) {
           tampilMenu();
           textfield_find.setText(null);
-        } else
-            searchMenu();
+        } else {
+            Searching search = new Searching();
+            String keyword = textfield_find.getText();
+            btn_find.setText("Clear");
+            panel_menu.removeAll();
+            Item found = search.cariMenu(keyword, menuController.getMenus());
+            if (found != null) {
+                btn_find.setText("Clear");
+                panel_menu.repaint();
+                panel_menu.revalidate();
+            } else {
+                JOptionPane.showMessageDialog(this, "Tidak Ditemukan");
+            }
+        }
         
     }//GEN-LAST:event_btn_findActionPerformed
-
-    private void btn_menu_minumanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menu_minumanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_menu_minumanActionPerformed
-
-    private void btn_menu_tambahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menu_tambahanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_menu_tambahanActionPerformed
 
     private void btn_dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dashboardActionPerformed
         DashboardForm dash = new DashboardForm();
@@ -390,8 +346,6 @@ public class HomeForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_find;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_menu_makanan;
-    private javax.swing.JButton btn_menu_minuman;
-    private javax.swing.JButton btn_menu_tambahan;
     private javax.swing.JComboBox<String> cmb_filter;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -404,7 +358,6 @@ public class HomeForm extends javax.swing.JFrame {
     private java.awt.Panel panel_menu;
     private java.awt.Panel panel_menu1;
     private java.awt.Panel panel_sidebar;
-    private javax.swing.JScrollPane scroll_menu;
     private javax.swing.JTextField textfield_find;
     // End of variables declaration//GEN-END:variables
 }

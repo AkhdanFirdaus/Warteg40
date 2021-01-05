@@ -7,9 +7,14 @@ package com.kelompok1b.warteg40.view.Home;
 
 import com.kelompok1b.warteg40.controller.CartController;
 import com.kelompok1b.warteg40.model.Item;
-import com.kelompok1b.warteg40.view.Home.Widget.CartItemPanel;
+import java.awt.ComponentOrientation;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+//import com.kelompok1b.warteg40.view.Home.Widget.CartItemPanel;
+import java.awt.Label;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -22,15 +27,49 @@ public class CartForm extends javax.swing.JFrame {
      * Creates new form Checkout
      * @param cartController
      */
-    public CartForm(CartController newController) {
+    public CartForm(CartController cartController) {
         initComponents();
-        this.cartController = newController;
-        cart_panel.setLayout(new BoxLayout(cart_panel, BoxLayout.Y_AXIS));
+        this.cartController = cartController;
+        tampilCart();
+    }
+    
+    public void tampilCart() {
+        lbl_counter.setText(cartController.getCart().size() + " item");
+        cart_panel.removeAll();
         for (Item item : cartController.getCart()) {
-            cart_panel.add(new CartItemPanel(item, cartController));
-        }
-        System.out.println("Constructor CartForm");
+            JPanel itemPanel = new JPanel();
+            itemPanel.setLayout(new FlowLayout());
             
+            JPanel itemDetail = new JPanel();
+            itemDetail.setLayout(new GridLayout(2, 1));
+            itemDetail.add(new Label(item.getItemName()));
+            itemDetail.add(new Label(item.getNameCategory()));
+            
+            itemPanel.add(itemDetail);
+            itemPanel.add(new Label(String.valueOf(item.getPrice())));
+            itemPanel.add(new Label("x " + String.valueOf(item.getQty())));
+            
+            JButton buttonPlus = new JButton();
+            buttonPlus.setText("+");
+            JButton buttonMin = new JButton();
+            buttonMin.setText("-");
+            buttonPlus.addActionListener((var e) -> {
+                cartController.addToCart(item);
+                tampilCart();
+            });
+            buttonMin.addActionListener((var e) -> {
+                cartController.minItem(item);
+                tampilCart();
+            });
+            
+            itemPanel.add(buttonPlus);
+            itemPanel.add(buttonMin);
+            
+            cart_panel.add(itemPanel);
+//            cart_panel.add(new CartItemPanel(item, cartController));
+        }
+        cart_panel.repaint();
+        cart_panel.revalidate();
     }
        
 
@@ -43,62 +82,100 @@ public class CartForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_checkout = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        lbl_counter = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         scroll_cart = new javax.swing.JScrollPane();
         cart_panel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        btn_checkout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(400, 500));
         setResizable(false);
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.PAGE_AXIS));
+
+        jPanel2.setPreferredSize(new java.awt.Dimension(400, 43));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Keranjang");
+        jPanel2.add(jLabel1);
+
+        jPanel4.setPreferredSize(new java.awt.Dimension(340, 12));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 271, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 7, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel4);
+
+        lbl_counter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_counter.setText("jLabel2");
+        jPanel2.add(lbl_counter);
+
+        getContentPane().add(jPanel2);
+
+        jPanel5.setPreferredSize(new java.awt.Dimension(339, 20));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel5);
+
+        cart_panel.setPreferredSize(new java.awt.Dimension(400, 350));
+        cart_panel.setLayout(new javax.swing.BoxLayout(cart_panel, javax.swing.BoxLayout.PAGE_AXIS));
+        scroll_cart.setViewportView(cart_panel);
+
+        getContentPane().add(scroll_cart);
+
+        jPanel3.setPreferredSize(new java.awt.Dimension(339, 12));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 12, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel3);
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(339, 20));
+        jPanel1.setLayout(new java.awt.CardLayout());
 
         btn_checkout.setText("Checkout");
+        btn_checkout.setPreferredSize(new java.awt.Dimension(77, 40));
         btn_checkout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_checkoutActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_checkout, "card2");
 
-        javax.swing.GroupLayout cart_panelLayout = new javax.swing.GroupLayout(cart_panel);
-        cart_panel.setLayout(cart_panelLayout);
-        cart_panelLayout.setHorizontalGroup(
-            cart_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 317, Short.MAX_VALUE)
-        );
-        cart_panelLayout.setVerticalGroup(
-            cart_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 256, Short.MAX_VALUE)
-        );
-
-        scroll_cart.setViewportView(cart_panel);
-
-        jLabel1.setText("Keranjang");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(scroll_cart)
-                    .addComponent(btn_checkout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(scroll_cart, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_checkout, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(jPanel1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -149,6 +226,12 @@ public class CartForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_checkout;
     private javax.swing.JPanel cart_panel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel lbl_counter;
     private javax.swing.JScrollPane scroll_cart;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,7 +6,10 @@
 package com.kelompok1b.warteg40.view.Admin.widget;
 
 import com.kelompok1b.warteg40.controller.CartController;
+import com.kelompok1b.warteg40.controller.Searching;
 import com.kelompok1b.warteg40.controller.TransactionController;
+import com.kelompok1b.warteg40.model.Transaction;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class TransactionPanel extends javax.swing.JPanel {
     private CartController cartController;
     private TransactionController transactionController;
+    private DefaultTableModel table_model = new DefaultTableModel();
     /**
      * Creates new form MenuPanel
      */
@@ -23,23 +27,21 @@ public class TransactionPanel extends javax.swing.JPanel {
         initComponents();
         cartController = CartController.getInstance();
         transactionController = TransactionController.getInstance(cartController);
+        
+        table_model.addColumn("ID");
+        table_model.addColumn("Nama");
+        table_model.addColumn("Tanggal");
+        table_model.addColumn("Jml Item");
+        table_model.addColumn("Sub Total");
+        table_model.addColumn("Bayar");
+        table_model.addColumn("Kembalian");
         tampilData();
     }
     
     public void tampilData() {
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID");
-        model.addColumn("Nama");
-        model.addColumn("Tanggal");
-        model.addColumn("Jml Item");
-        model.addColumn("Sub Total");
-        model.addColumn("Bayar");
-        model.addColumn("Kembalian");
-        
-        //menampilkan data database kedalam tabel
         try {
              transactionController.getTransactions().forEach(transaction -> {
-                 model.addRow(new Object[]{
+                 table_model.addRow(new Object[]{
                     transaction.getIdTransaction(),
                     transaction.getCustomerName(),
                     transaction.getDate(),
@@ -49,8 +51,9 @@ public class TransactionPanel extends javax.swing.JPanel {
                     transaction.getChangeMoney()
                 });
              });
-            table_transactions.setModel(model);
+            table_transactions.setModel(table_model);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal Menampilkan Data Transaksi");
         }
     }
 
@@ -67,6 +70,7 @@ public class TransactionPanel extends javax.swing.JPanel {
         cmb_filter = new javax.swing.JComboBox<>();
         textfield_find = new javax.swing.JTextField();
         btn_find = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_transactions = new javax.swing.JTable();
 
@@ -87,11 +91,6 @@ public class TransactionPanel extends javax.swing.JPanel {
         textfield_find.setText("Ketik yang Ingin Dicari");
         textfield_find.setMinimumSize(new java.awt.Dimension(240, 40));
         textfield_find.setPreferredSize(new java.awt.Dimension(240, 40));
-        textfield_find.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfield_findActionPerformed(evt);
-            }
-        });
         panel_menu1.add(textfield_find);
 
         btn_find.setText("Cari");
@@ -106,6 +105,7 @@ public class TransactionPanel extends javax.swing.JPanel {
         panel_menu1.add(btn_find);
 
         add(panel_menu1);
+        add(jPanel1);
 
         table_transactions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,21 +141,48 @@ public class TransactionPanel extends javax.swing.JPanel {
 
     private void cmb_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filterActionPerformed
         int type = cmb_filter.getSelectedIndex();
+        table_model.setRowCount(0);
         transactionController.sortTransaction(type);
+        table_transactions.repaint();
+        table_model.fireTableDataChanged();
+        tampilData();
     }//GEN-LAST:event_cmb_filterActionPerformed
 
-    private void textfield_findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_findActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfield_findActionPerformed
-
     private void btn_findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_findActionPerformed
-        // TODO add your handling code here:
+        if (btn_find.getText().equals("Clear")) {
+            btn_find.setText("Cari");
+            textfield_find.setText(null);
+            table_model.setRowCount(0);
+            tampilData();
+        } else {
+            Searching search = new Searching();
+            String keyword = textfield_find.getText();
+            Transaction found = search.cariTransaksi(keyword, transactionController.getTransactions());
+            if (found != null) {
+                btn_find.setText("Clear");
+                table_model.setRowCount(0);
+                table_model.addRow(new Object[] {
+                    found.getIdTransaction(),
+                    found.getCustomerName(),
+                    found.getDate(),
+                    found.getCountOrderedItem(),
+                    found.getSubTotal(),
+                    found.getPaidMoney(),
+                    found.getChangeMoney()
+                });
+                table_transactions.repaint();
+                table_model.fireTableDataChanged();
+            } else {
+                JOptionPane.showMessageDialog(this, "Tidak Ditemukan");
+            }
+        }
     }//GEN-LAST:event_btn_findActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_find;
     private javax.swing.JComboBox<String> cmb_filter;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Panel panel_menu1;
     private javax.swing.JTable table_transactions;

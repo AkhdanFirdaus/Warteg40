@@ -6,6 +6,8 @@
 package com.kelompok1b.warteg40.view.Admin.widget;
 
 import com.kelompok1b.warteg40.controller.MenuController;
+import com.kelompok1b.warteg40.controller.Searching;
+import com.kelompok1b.warteg40.model.Item;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,7 +33,6 @@ public class MenuPanel extends javax.swing.JPanel {
     }
     
     public void tampilData() {
-        
         try {
              menuController.getMenus().forEach(menu -> {
                  table_model.addRow(new Object[] {
@@ -116,22 +117,11 @@ public class MenuPanel extends javax.swing.JPanel {
         jPanel1.add(jLabel3);
 
         id_field.setEditable(false);
-        id_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_fieldname_create_field(evt);
-            }
-        });
         jPanel1.add(id_field);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Nama");
         jPanel1.add(jLabel1);
-
-        name_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                name_fieldname_create_field(evt);
-            }
-        });
         jPanel1.add(name_field);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -139,22 +129,11 @@ public class MenuPanel extends javax.swing.JPanel {
         jPanel1.add(jLabel2);
 
         category_combo_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Makanan", "Minuman", "Tambahan" }));
-        category_combo_box.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                category_combo_boxcategory_box_field(evt);
-            }
-        });
         jPanel1.add(category_combo_box);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Harga");
         jPanel1.add(jLabel4);
-
-        price_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                price_fieldprice_create_field(evt);
-            }
-        });
         jPanel1.add(price_field);
 
         form_panel.add(jPanel1);
@@ -215,11 +194,6 @@ public class MenuPanel extends javax.swing.JPanel {
         textfield_find.setText("Ketik yang Ingin Dicari");
         textfield_find.setMinimumSize(new java.awt.Dimension(240, 40));
         textfield_find.setPreferredSize(new java.awt.Dimension(240, 40));
-        textfield_find.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textfield_findActionPerformed(evt);
-            }
-        });
         panel_menu1.add(textfield_find);
         panel_menu1.add(jPanel3);
 
@@ -268,7 +242,6 @@ public class MenuPanel extends javax.swing.JPanel {
 
     private void cmb_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filterActionPerformed
         int type = cmb_filter.getSelectedIndex();
-        System.out.print("Selected filter: " + type);
         table_model.setRowCount(0);
         menuController.sort(type);
         table_menu.repaint();
@@ -276,25 +249,32 @@ public class MenuPanel extends javax.swing.JPanel {
         tampilData();
     }//GEN-LAST:event_cmb_filterActionPerformed
 
-    private void textfield_findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_findActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textfield_findActionPerformed
-
     private void btn_findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_findActionPerformed
-        // TODO add your handling code here:
+        if (btn_find.getText().equals("Clear")) {
+            btn_find.setText("Cari");
+            textfield_find.setText(null);
+            table_model.setRowCount(0);
+            tampilData();
+        } else {
+            Searching search = new Searching();
+            String keyword = textfield_find.getText();
+            Item found = search.cariMenu(keyword, menuController.getMenus());
+            if (found != null) {
+                btn_find.setText("Clear");
+                table_model.setRowCount(0);
+                table_model.addRow(new Object[] {
+                    found.getId()+1,
+                    found.getItemName(),
+                    found.getNameCategory(),
+                    found.getPrice()
+                });
+                table_menu.repaint();
+                table_model.fireTableDataChanged();
+            } else {
+                JOptionPane.showMessageDialog(this, "Tidak Ditemukan");
+            }
+        }
     }//GEN-LAST:event_btn_findActionPerformed
-
-    private void category_combo_boxcategory_box_field(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_category_combo_boxcategory_box_field
-        // TODO add your handling code here:
-    }//GEN-LAST:event_category_combo_boxcategory_box_field
-
-    private void name_fieldname_create_field(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_fieldname_create_field
-        // TODO add your handling code here:
-    }//GEN-LAST:event_name_fieldname_create_field
-
-    private void price_fieldprice_create_field(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_price_fieldprice_create_field
-        // TODO add your handling code here:
-    }//GEN-LAST:event_price_fieldprice_create_field
 
     private void btn_add_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_menuActionPerformed
         String name = name_field.getText();
@@ -339,10 +319,6 @@ public class MenuPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Gagal");
         }
     }//GEN-LAST:event_btn_edit_menuActionPerformed
-
-    private void id_fieldname_create_field(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_fieldname_create_field
-        // TODO add your handling code here:
-    }//GEN-LAST:event_id_fieldname_create_field
 
     private void btn_clear_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clear_menuActionPerformed
         clearForm();
