@@ -7,7 +7,6 @@ package com.kelompok1b.warteg40.controller;
 
 import com.kelompok1b.warteg40.model.User;
 import java.util.LinkedList;
-import java.util.TreeSet;
 
 /**
  *
@@ -15,7 +14,7 @@ import java.util.TreeSet;
  */
 public class UserController {
     private static UserController instance = null;
-    TreeSet<User> users = new TreeSet<User>();
+    LinkedList<User> users = new LinkedList<User>();
     User loggedInUser;
 
     public UserController() {
@@ -54,7 +53,7 @@ public class UserController {
     }
     
     public boolean register(String username, String password) {
-        int newId = users.last().getId() + 1;
+        int newId = users.getLast().getId() + 1;
         users.add(new User(newId, username, password, 1));
         System.out.println("Sukses Register!");
         return true;
