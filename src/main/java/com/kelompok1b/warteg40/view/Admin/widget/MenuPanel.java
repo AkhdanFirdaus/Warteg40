@@ -23,19 +23,19 @@ public class MenuPanel extends javax.swing.JPanel {
     public MenuPanel() {
         initComponents();
         menuController = MenuController.getInstance();
-        tampilData();
-    }
-    
-    public void tampilData() {
         table_model.addColumn("ID");
         table_model.addColumn("Nama");
         table_model.addColumn("Kategori");
         table_model.addColumn("Harga");
+        tampilData();
+    }
+    
+    public void tampilData() {
         
         try {
              menuController.getMenus().forEach(menu -> {
                  table_model.addRow(new Object[] {
-                    menu.getId(),
+                    menu.getId()+1,
                     menu.getItemName(),
                     menu.getNameCategory(),
                     menu.getPrice()
@@ -267,7 +267,13 @@ public class MenuPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmb_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filterActionPerformed
-//        menuController.sort
+        int type = cmb_filter.getSelectedIndex();
+        System.out.print("Selected filter: " + type);
+        table_model.setRowCount(0);
+        menuController.sort(type);
+        table_menu.repaint();
+        table_model.fireTableDataChanged();
+        tampilData();
     }//GEN-LAST:event_cmb_filterActionPerformed
 
     private void textfield_findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_findActionPerformed

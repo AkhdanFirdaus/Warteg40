@@ -13,7 +13,6 @@ import com.kelompok1b.warteg40.view.Admin.DashboardForm;
 import com.kelompok1b.warteg40.view.Auth.LoginForm;
 import com.kelompok1b.warteg40.view.Home.Widget.GridMenu;
 import java.awt.GridLayout;
-import javax.swing.BoxLayout;
 
 /**
  *
@@ -44,10 +43,35 @@ public class HomeForm extends javax.swing.JFrame {
     }
     
     public void tampilMenu() {
+        panel_menu.removeAll();
         panel_menu.setLayout(new GridLayout(3, 3));
         menuController = MenuController.getInstance();
         for (Item item : menuController.getMenus())
             panel_menu.add(new GridMenu(item, cartController));
+        panel_menu.repaint();
+        panel_menu.revalidate();
+        btn_find.setText("Cari");
+        
+    }
+    
+    public void searchMenu() {
+        boolean found = false;
+        String keyword = textfield_find.getText();
+        btn_find.setText("Clear");
+        panel_menu.removeAll();
+        for (Item item : menuController.getMenus()) {
+            if (item.getItemName().equalsIgnoreCase(keyword)) {
+                panel_menu.add(new GridMenu(item, cartController));
+                found = true;
+            }
+        }
+        if (found) {
+            btn_find.setText("Clear");
+            panel_menu.repaint();
+            panel_menu.revalidate();
+        } else {
+            tampilMenu();
+        }
     }
 
     /**
@@ -82,7 +106,6 @@ public class HomeForm extends javax.swing.JFrame {
         panel_menu = new java.awt.Panel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -284,9 +307,9 @@ public class HomeForm extends javax.swing.JFrame {
 
     private void cmb_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filterActionPerformed
         int type = cmb_filter.getSelectedIndex();
-        MenuController menuController = MenuController.getInstance();
         System.out.print("Selected filter: " + type);
-        //panel_menu.repaint();
+        menuController.sort(type);
+        tampilMenu();
     }//GEN-LAST:event_cmb_filterActionPerformed
 
     private void btn_cartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cartActionPerformed
@@ -295,11 +318,20 @@ public class HomeForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cartActionPerformed
 
     private void textfield_findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_findActionPerformed
-        // TODO add your handling code here:
+        if (btn_find.getText().contains("Clear")) {
+          tampilMenu();
+          textfield_find.setText(null);
+        } else
+            searchMenu();
     }//GEN-LAST:event_textfield_findActionPerformed
 
     private void btn_findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_findActionPerformed
-        // TODO add your handling code here:
+        if (btn_find.getText().contains("Clear")) {
+          tampilMenu();
+          textfield_find.setText(null);
+        } else
+            searchMenu();
+        
     }//GEN-LAST:event_btn_findActionPerformed
 
     private void btn_menu_minumanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menu_minumanActionPerformed

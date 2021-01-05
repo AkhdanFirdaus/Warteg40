@@ -58,18 +58,9 @@ public class MenuController {
         return this.menus;
     }
     
-    public ArrayList<Item> sort(int type) {
-//        none, Nama, Kategori, Harga
-//        switch (type) {
-//            case 0:
-//                sort
-//        }
-        return this.menus;
-    }
-    
-    public ArrayList<Item> sort_asc() {
-        
-        return this.menus;
+    public void sort(int type) {
+        Sorting sort = new Sorting();
+        this.menus = sort.sortMenu(menus, type);
     }
     
     public void displayMenu() {

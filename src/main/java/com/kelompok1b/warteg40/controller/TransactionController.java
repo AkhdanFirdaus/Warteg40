@@ -7,7 +7,7 @@ package com.kelompok1b.warteg40.controller;
 
 import com.kelompok1b.warteg40.model.Item;
 import com.kelompok1b.warteg40.model.Transaction;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,7 +16,7 @@ import java.util.LinkedList;
 public class TransactionController {
     private static TransactionController instance = null;
     private CartController cartController;
-    private LinkedList<Transaction> transactions = new LinkedList<Transaction>();
+    private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     
     public TransactionController(CartController newCart) {
         this.cartController = newCart;
@@ -30,7 +30,7 @@ public class TransactionController {
     
     public boolean pay(String name, int money) {
         if (money >= cartController.getSubTotal()) {
-            int lastId = transactions.isEmpty() ? 1 : transactions.getLast().getIdTransaction() + 1;
+            int lastId = transactions.isEmpty() ? 1 : transactions.get(transactions.size()-1).getIdTransaction() + 1;
             Transaction newTransaction = new Transaction(lastId, name,  "Senin", money, cartController.cart);
             transactions.add(newTransaction);
             System.out.println("Sukses transaksi!");
@@ -42,7 +42,7 @@ public class TransactionController {
         }
     }
     
-    public LinkedList<Transaction> getTransactions() {
+    public ArrayList<Transaction> getTransactions() {
         return this.transactions;
     } 
     
@@ -62,5 +62,10 @@ public class TransactionController {
             }
         }
         
+    }
+    
+    public void sortTransaction(int type) {
+        Sorting sort = new Sorting();
+        this.transactions = sort.sortTransaction(transactions, type);
     }
 }

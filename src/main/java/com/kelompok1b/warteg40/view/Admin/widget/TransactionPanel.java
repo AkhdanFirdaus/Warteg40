@@ -31,9 +31,10 @@ public class TransactionPanel extends javax.swing.JPanel {
         model.addColumn("ID");
         model.addColumn("Nama");
         model.addColumn("Tanggal");
+        model.addColumn("Jml Item");
+        model.addColumn("Sub Total");
         model.addColumn("Bayar");
         model.addColumn("Kembalian");
-        model.addColumn("Jml Item");
         
         //menampilkan data database kedalam tabel
         try {
@@ -42,9 +43,10 @@ public class TransactionPanel extends javax.swing.JPanel {
                     transaction.getIdTransaction(),
                     transaction.getCustomerName(),
                     transaction.getDate(),
+                    transaction.getCountOrderedItem(),
+                    transaction.getSubTotal(),
                     transaction.getPaidMoney(),
-                    transaction.getChangeMoney(),
-                    transaction.getCountOrderedItem()
+                    transaction.getChangeMoney()
                 });
              });
             table_transactions.setModel(model);
@@ -72,7 +74,7 @@ public class TransactionPanel extends javax.swing.JPanel {
 
         panel_menu1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 
-        cmb_filter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", "Nama", "Kategori", "Harga" }));
+        cmb_filter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", "id", "Nama", "SubTotal" }));
         cmb_filter.setMinimumSize(new java.awt.Dimension(120, 40));
         cmb_filter.setPreferredSize(new java.awt.Dimension(100, 40));
         cmb_filter.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +140,8 @@ public class TransactionPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmb_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filterActionPerformed
-        // TODO add your handling code here:
+        int type = cmb_filter.getSelectedIndex();
+        transactionController.sortTransaction(type);
     }//GEN-LAST:event_cmb_filterActionPerformed
 
     private void textfield_findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_findActionPerformed
