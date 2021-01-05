@@ -34,7 +34,7 @@ public class CartForm extends javax.swing.JFrame {
     }
     
     public void tampilCart() {
-        lbl_counter.setText(cartController.getCart().size() + " item");
+        lbl_counter.setText(cartController.getCart().size() + " item - Rp." + cartController.getSubTotal());
         cart_panel.removeAll();
         for (Item item : cartController.getCart()) {
             JPanel itemPanel = new JPanel();
