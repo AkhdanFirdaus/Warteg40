@@ -7,7 +7,7 @@ package com.kelompok1b.warteg40.model;
 
 /**
  *
- * @author akhda
+ * @author akhdan
  */
 
 public class Item {
@@ -16,24 +16,24 @@ public class Item {
     private int category;
     private float price;
     private int qty = 1;
-    
+
     public Item(int id, String foodName, int category, float price) {
         this.id = id;
         this.foodName = foodName;
         this.category = category;
         this.price = price;
     }
-    
+
     public int getId() {
         return this.id;
     }
-    
+
     public String getItemName() {
         return this.foodName;
     }
-    
+
     public String getNameCategory() {
-        switch(this.category) {
+        switch (this.category) {
             case 1:
                 return "Makanan";
             case 2:
@@ -44,31 +44,31 @@ public class Item {
                 return "Tidak Ada";
         }
     }
-    
+
     public int getCategory() {
         return this.category;
     }
-    
+
     public int getQty() {
         return this.qty;
     }
-    
+
     public float getPrice() {
         return this.price;
     }
-    
+
     public float getSubTotalItem() {
         return this.price * this.qty;
     }
-    
+
     public void plusQty() {
         this.qty++;
     }
-    
+
     public void minQty() {
         this.qty--;
     }
-    
+
     public void displayItem() {
         System.out.println(this.getId());
         System.out.println(this.getItemName());

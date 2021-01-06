@@ -10,29 +10,29 @@ import java.util.ArrayList;
 
 /**
  *
- * @author akhda
+ * @author akhdan
  */
 public class CartController {
     private static CartController instance = null;
     ArrayList<Item> cart = new ArrayList<Item>();
-    
+
     public static CartController getInstance() {
         if (instance == null)
             return new CartController();
         return instance;
     }
-    
+
     public void addToCart(Item item) {
         if (cart.contains(item)) {
             cart.get(cart.indexOf(item)).plusQty();
             System.out.println("qty item ditambah");
         } else {
             cart.add(item);
-            System.out.println("item ditambah");   
+            System.out.println("item ditambah");
         }
         displayCart();
     }
-    
+
     public void minItem(Item item) {
         if (item.getQty() > 1) {
             cart.get(cart.indexOf(item)).minQty();
@@ -40,11 +40,11 @@ public class CartController {
             cart.remove(item);
         }
     }
-    
+
     public void clearCart() {
         cart.clear();
     }
-    
+
     public int getSubTotal() {
         int subTotal = 0;
         for (Item item : cart) {
@@ -52,11 +52,11 @@ public class CartController {
         }
         return subTotal;
     }
-    
+
     public ArrayList<Item> getCart() {
         return this.cart;
     }
-    
+
     public void displayCart() {
         if (cart.isEmpty()) {
             System.out.println("Cart Kosong");

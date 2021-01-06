@@ -5,10 +5,8 @@
  */
 package com.kelompok1b.warteg40.view.Auth;
 
-import com.kelompok1b.warteg40.controller.CartController;
 import com.kelompok1b.warteg40.controller.UserController;
 import com.kelompok1b.warteg40.view.Home.HomeForm;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,13 +34,13 @@ public class LoginForm extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        username_label = new javax.swing.JTextField();
+        username_field = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        password_label = new javax.swing.JPasswordField();
+        password_field = new javax.swing.JPasswordField();
         login_button = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         to_register_form_button = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,10 +71,10 @@ public class LoginForm extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Kembali");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_back.setText("Kembali");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_backActionPerformed(evt);
             }
         });
 
@@ -94,10 +92,10 @@ public class LoginForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(login_button, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                            .addComponent(password_label, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(username_label, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(password_field, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(username_field, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btn_back)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -113,14 +111,14 @@ public class LoginForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jButton1))
+                    .addComponent(btn_back))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(username_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(username_field, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(password_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(password_field, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(login_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -152,8 +150,8 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
-        String username = username_label.getText();
-        String password = String.valueOf(password_label.getPassword());
+        String username = username_field.getText();
+        String password = String.valueOf(password_field.getPassword());
         UserController controller = UserController.getInstance();
         boolean res = controller.login(username, password);
         if (res) {
@@ -162,8 +160,8 @@ public class LoginForm extends javax.swing.JFrame {
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Gagal Login");
-            username_label.setText(null);
-            password_label.setText(null);
+            username_field.setText(null);
+            password_field.setText(null);
         }
     }//GEN-LAST:event_login_buttonActionPerformed
 
@@ -173,22 +171,22 @@ public class LoginForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_to_register_form_buttonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         HomeForm home = new HomeForm();
         home.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_backActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_back;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton login_button;
-    private javax.swing.JPasswordField password_label;
+    private javax.swing.JPasswordField password_field;
     private javax.swing.JButton to_register_form_button;
-    private javax.swing.JTextField username_label;
+    private javax.swing.JTextField username_field;
     // End of variables declaration//GEN-END:variables
 }

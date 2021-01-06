@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author akhda
+ * @author akhdan
  */
 public class Transaction {
     int idTransaction;
@@ -17,39 +17,40 @@ public class Transaction {
     String date;
     int paidMoney;
     ArrayList<Item> orderedItem = new ArrayList<Item>();
-    
-    public Transaction(int idTransaction, String customerName, String date, int paidMoney, ArrayList<Item> orderedItem) {
+
+    public Transaction(int idTransaction, String customerName, String date, int paidMoney,
+            ArrayList<Item> orderedItem) {
         this.idTransaction = idTransaction;
         this.customerName = customerName;
         this.date = date;
         this.paidMoney = paidMoney;
         this.orderedItem.addAll(orderedItem);
     }
-    
+
     public int getIdTransaction() {
         return this.idTransaction;
     }
-    
+
     public String getCustomerName() {
         return this.customerName;
     }
-    
+
     public String getDate() {
         return this.date;
     }
-    
+
     public ArrayList<Item> getOrderedItem() {
         return this.orderedItem;
     }
-    
+
     public int getPaidMoney() {
         return this.paidMoney;
     }
-    
+
     public int getCountOrderedItem() {
         return this.orderedItem.size();
     }
-    
+
     public int getSubTotal() {
         int subTotal = 0;
         for (Item item : orderedItem) {
@@ -57,7 +58,7 @@ public class Transaction {
         }
         return subTotal;
     }
-    
+
     public int getChangeMoney() {
         return this.paidMoney - this.getSubTotal();
     }

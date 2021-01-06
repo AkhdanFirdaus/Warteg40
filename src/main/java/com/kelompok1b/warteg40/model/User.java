@@ -7,41 +7,41 @@ package com.kelompok1b.warteg40.model;
 
 /**
  *
- * @author akhda
+ * @author akhdan
  */
 public class User {
     private int id;
     private String name;
     private String password;
     private int role;
-    
-    //Admin
+
+    // Admin
     public User(int id, String name, String password, int role) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.role = role;
     }
-    
-    //Customer
+
+    // Customer
     public User(int id, String name, int role) {
         this.id = id;
         this.name = name;
         this.role = role;
     }
-    
+
     public int getId() {
         return this.id;
     }
-    
+
     public String getName() {
         return this.name;
     }
-    
+
     public String getPassword() {
         return this.password;
     }
-    
+
     public int getRole() {
         return this.role;
     }

@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author akhda
+ * @author akhdan
  */
 public class UserController {
     private static UserController instance = null;
@@ -21,23 +21,22 @@ public class UserController {
         User admin = new User(0, "admin", "admin", 0);
         users.add(admin);
     }
-    
-    //Singleto
+
+    // Singleton
     public static UserController getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new UserController();
         return instance;
     }
 
-    
     public void setUser(User user) {
         this.loggedInUser = user;
     }
-    
+
     public User getLoggedInUser() {
         return this.loggedInUser;
     }
-    
+
     public boolean login(String username, String password) {
         System.out.println("Pass : " + password);
         for (User foundUser : users) {
@@ -45,24 +44,23 @@ public class UserController {
                 setUser(foundUser);
                 System.out.println("Sukses Login!");
                 return true;
-                //redirect dashboard
             }
         }
         System.out.println("Gagal Login!");
         return false;
     }
-    
+
     public boolean register(String username, String password) {
         int newId = users.getLast().getId() + 1;
         users.add(new User(newId, username, password, 1));
         System.out.println("Sukses Register!");
         return true;
     }
-    
+
     public void logout() {
         loggedInUser = null;
     }
-    
+
     public void displayUsers() {
         for (User user : users) {
             System.out.println("id  : " + user.getId());

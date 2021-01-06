@@ -11,13 +11,14 @@ import java.util.ArrayList;
 
 /**
  *
- * @author akhda
+ * @author akhdan
  */
 public class MenuController {
     public static MenuController instance = null;
     private ArrayList<Item> menus = new ArrayList<Item>();
-    
+
     public MenuController() {
+        // Dummy Data
         menus.add(new Item(0, "Nasi Goreng", 1, 14000));
         menus.add(new Item(1, "Nasi Kuning", 1, 8000));
         menus.add(new Item(2, "Nasi Uduk", 1, 8000));
@@ -27,42 +28,42 @@ public class MenuController {
         menus.add(new Item(6, "Jus Buah", 2, 12000));
         menus.add(new Item(7, "Kerupuk", 3, 2000));
     }
-    
+
     public static MenuController getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new MenuController();
         return instance;
     }
-    
+
     public boolean addMenu(String foodName, int category, float price) {
         int lastId = menus.isEmpty() ? 1 : menus.get(menus.size() - 1).getId() + 1;
         Item newItem = new Item(lastId, foodName, category, price);
         menus.add(newItem);
         System.out.println("Menu telah ditambahkan");
-        
+
         return true;
     }
-    
+
     public boolean editMenu(int id, String foodName, int category, float price) {
         Item newItem = menus.set(id, new Item(id, foodName, category, price));
         System.out.println("Menu telah di update");
         return true;
     }
-    
+
     public boolean deleteMenu(int id) {
         menus.remove(id);
         return true;
     }
-    
+
     public ArrayList<Item> getMenus() {
         return this.menus;
     }
-    
+
     public void sort(int type) {
         Sorting sort = new Sorting();
         this.menus = sort.sortMenu(menus, type);
     }
-    
+
     public void displayMenu() {
         for (Item item : this.menus) {
             System.out.println("ID   = " + item.getId());

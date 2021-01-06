@@ -62,12 +62,12 @@
                           <EmptySpace pref="97" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="login_button" alignment="0" pref="265" max="32767" attributes="0"/>
-                              <Component id="password_label" alignment="1" max="32767" attributes="0"/>
-                              <Component id="username_label" alignment="1" max="32767" attributes="0"/>
+                              <Component id="password_field" alignment="1" max="32767" attributes="0"/>
+                              <Component id="username_field" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_back" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -88,16 +88,16 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_back" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="username_label" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="username_field" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="password_label" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="password_field" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="32767" attributes="0"/>
@@ -127,7 +127,7 @@
             <Property name="text" type="java.lang.String" value="Username"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="username_label">
+        <Component class="javax.swing.JTextField" name="username_field">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -135,7 +135,7 @@
             <Property name="text" type="java.lang.String" value="Password"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="password_label">
+        <Component class="javax.swing.JPasswordField" name="password_field">
         </Component>
         <Component class="javax.swing.JButton" name="login_button">
           <Properties>
@@ -158,12 +158,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="to_register_form_buttonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btn_back">
           <Properties>
             <Property name="text" type="java.lang.String" value="Kembali"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_backActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
